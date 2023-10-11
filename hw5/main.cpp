@@ -44,7 +44,7 @@ int main(void) {
     other_string.print();
 
     // Move constructor
-    MyString moved_string(move(other_string));
+    MyString moved_string(std::move(other_string));
     moved_string.print();
     return 0;
 }

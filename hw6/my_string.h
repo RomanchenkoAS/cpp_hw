@@ -1,6 +1,8 @@
 #pragma once
 #include <cstring> // for strlen
 #include <iostream>
+#include <stdexcept> // for out_of_range instead of assert
+
 using namespace std;
 
 class MyString {
@@ -24,6 +26,9 @@ public:
   ~MyString() { delete[] line; }
 
   char operator[](int i) {
+    if (i < 0 || i >= strlen(line)) {
+      throw out_of_range("Invalid index");
+    }
     return line[i];
   }
 

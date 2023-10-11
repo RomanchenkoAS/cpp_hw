@@ -10,15 +10,21 @@ class MyString {
     MyString(const char *other_line) : line(nullptr) {
         line = set_line(other_line);
     };
+
     MyString() : MyString(""){};
+
     MyString(const MyString &other_string)
         : MyString(other_string.get_line()){};
+    
     MyString(MyString &&other_string) : line(other_string.line) {
         other_string.line = nullptr;
         cout << "Move constructor worked" << endl;
-    }
-    ~MyString() { delete[] line; }
-    char *get_line() const { return line; }
+    };
+
+    ~MyString() { delete[] line; };
+
+    char *get_line() const { return line; };
+
     char *set_line(const char *other_line) {
         if (line != nullptr)
             delete[] line;
@@ -29,9 +35,11 @@ class MyString {
         }
         result_line[length] = '\0';
         return result_line;
-    }
-    int get_length() const { return strlen(line); }
-    void print() { cout << line << endl; }
+    };
+
+    int get_length() const { return strlen(line); };
+
+    void print() { cout << line << endl; };
 };
 
 int main(void) {

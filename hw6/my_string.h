@@ -32,6 +32,15 @@ public:
     return line[i];
   }
 
+  int operator()(const char character) const {
+    for (int i = 0; i < strlen(line); i++) {
+      if (line[i] == character) return i;
+    }
+    return -1;
+  }
+
+  operator int() const { return get_length(); }
+  
   char *get_line() const { return line; }
 
   char *set_line(const char *other_line) {

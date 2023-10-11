@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(void) {
-  MyString new_string("hello");
+  MyString new_string("hello world!");
   cout << "Initial string:" << endl;
   new_string.print();
 
@@ -18,6 +18,9 @@ int main(void) {
   } catch (const std::out_of_range) {
     cout << "Invalid index error caught!" << endl;
   }
+
+  cout << "Trying to find 'w' with overloaded (): " << new_string('w') << endl;
+  cout << "Transformation to <int>: " << int(new_string) << endl;
 
   return 0;
 }

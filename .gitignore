@@ -1,0 +1,8 @@
+*/output/
+*/**/output/ 
+
+*.pdf
+*.zip
+.vscode
+*/.vscode
+.clang-format

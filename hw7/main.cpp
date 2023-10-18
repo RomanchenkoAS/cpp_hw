@@ -49,7 +49,7 @@ public:
   }
   int binary_search(int index, T element)
   {
-    // TODO
+    VectorArray copy = // TODO we need copy constructor here
   }
   void set_element(int index, T element)
   {

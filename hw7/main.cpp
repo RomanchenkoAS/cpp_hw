@@ -20,7 +20,7 @@ public:
       cout << element << endl;
     }
   }
-  VectorArray &operator=(const VectorArray &other)
+  VectorArray &operator==(const VectorArray &other)
   {
     if (array.size() != other.size())
     {
@@ -28,7 +28,7 @@ public:
     }
     for (int i = 0; i < array.size(); i++)
     {
-      if !(array[i] == other[i])
+      if (array[i] != other[i])
       {
         return false;
       }
@@ -49,6 +49,7 @@ public:
   }
   int binary_search(int index, T element)
   {
+    // TODO
   }
   void set_element(int index, T element)
   {
@@ -59,12 +60,30 @@ public:
 int main(void)
 {
 
+  // Checking constructor
   cout << "henlo" << endl;
   vector<int> arr = {10, 2, 3, 4, 5, 0, 1};
   VectorArray object(arr);
+
+  // Checking print and sort
   object.print();
   object.sort();
   cout << "\n\nsorted:" << endl;
   object.print();
+
+  // Checking == operator
+  vector<int> arr1 = {10, 2, 3, 4, 5, 0, 1};
+  vector<int> arr2 = {10, 2, 3, 4, 5, 0, 1, 1};
+
+  bool equality1 = (arr1 == arr2);
+  cout << "Equality 1 = " << equality1 << endl;
+
+  vector<int> arr3 = {10, 2, 3, 4, 5, 0, 1};
+  vector<int> arr4 = {10, 2, 3, 4, 5, 0, 1};
+
+  bool equality2 = (arr3 == arr4);
+  cout << "Equality 2 = " << equality2 << endl;
+
+
   return 0;
 }

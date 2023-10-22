@@ -41,12 +41,21 @@ public:
 };
 
 int main() {
-//    cout << "Input a string:    ";
 
-    Text t("Hello    world   !    ");
+//    Simple test
+//    Text t1("Hello    world   !    ");
+//    t1.print();
+//    t1.shorten();
+//    t1.print();
 
-    t.print();
-    t.shorten();
-    t.print();
+//    User input test
+    cout << "Input a string: ";
+    string s1;
+    getline(cin, s1);
+    Text t2(s1);
+    t2.print();
+    t2.shorten();
+    t2.print();
+
     return 0;
 }

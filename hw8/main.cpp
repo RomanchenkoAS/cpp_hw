@@ -4,7 +4,7 @@
 using namespace std;
 
 template<class TypeName>
-class Matrix {
+class MatrixClass {
 private:
     vector<vector<TypeName>> matrix;
 
@@ -15,12 +15,12 @@ private:
     }
 
 public:
-    Matrix() : Matrix({{}}) {};
+    MatrixClass() : MatrixClass({{}}) {};
 
-    Matrix(vector<vector<TypeName>> new_vector) : matrix(std::move(new_vector)) {};
+    explicit MatrixClass(vector<vector<TypeName>> new_vector) : matrix(std::move(new_vector)) {};
 
     void print() const {
-        for (auto row: matrix) {
+        for (const auto &row: matrix) {
             for (auto element: row) {
                 cout << element << " ";
             }
@@ -54,9 +54,9 @@ public:
 
 int main() {
 
-    Matrix<int> m({{1, 2, 3},
-                   {4, 5, 6},
-                   {7, 8, 9}});
+    MatrixClass<int> m({{1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}});
     m.print();
 
     cout << "Testing user input:" << endl;

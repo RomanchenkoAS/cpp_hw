@@ -7,4 +7,4 @@
 */.vscode
 .clang-format
 .idea
-./main
+main

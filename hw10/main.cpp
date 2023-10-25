@@ -9,9 +9,11 @@ private:
 public:
     CharStack() : array() {};
 
-    CharStack(vector<char> new_vector) : array(new_vector) {};
+//    Сначала я говорю что параметрический конструктор обязателен в классе а потом без него пишу класс
+//    Ну что, забирайте десятку обратно Q_Q
+//    CharStack(vector<char> new_vector) : array(new_vector) {};
 
-    size_t get_size() {
+    size_t get_size() const {
         return array.size();
     }
 
@@ -19,18 +21,16 @@ public:
         array.push_back(c);
     }
 
-    char pop() {
-        char top_element = array.front();
+    void pop() {
         array.pop_back();
-        return top_element;
     }
 
-    bool is_empty() {
+    bool is_empty() const {
         if (get_size() == 0) return true; else return false;
     }
 
     char get_top() const {
-        return array.front();
+        return array.back();
     }
 };
 
@@ -59,8 +59,7 @@ bool is_valid(const string &input) {
     for (char c: input) {
         if (is_parenthesis(c)) {
 
-//            Cant close parenthesis before adding something
-            if (is_closing(c) || stack.is_empty()) return false;
+            if (is_closing(c) && stack.is_empty()) return false;
             if (is_closing(c)) {
                 char top = stack.get_top();
                 if (match(top, c)) stack.pop();
@@ -75,7 +74,7 @@ bool is_valid(const string &input) {
 
 int main() {
 
-    cout << "Input string ";
+    cout << "Input string: ";
     string s1;
     getline(cin, s1);
     if (is_valid(s1)) cout << "String is valid;" << endl;

@@ -11,7 +11,7 @@ public:
 
     CharStack(vector<char> new_vector) : array(new_vector) {};
 
-    int get_size() {
+    size_t get_size() {
         return array.size();
     }
 
@@ -25,6 +25,13 @@ public:
         return top_element;
     }
 
+    bool is_empty() {
+        if (get_size() == 0) return true; else return false;
+    }
+
+    char get_top() const {
+        return array.front();
+    }
 };
 
 bool is_parenthesis(const char c) {
@@ -34,13 +41,23 @@ bool is_parenthesis(const char c) {
 bool is_opening(const char c) {
     if (c == '{' || c == '(' || c == '[') return true; else return false;
 }
+
 bool is_closing(const char c) {
     if (c == '}' || c == ')' || c == ']') return true; else return false;
 }
 
-bool is_valid(const string input) {
+bool is_valid(const string& input) {
+    CharStack stack;
+
     for (char c: input) {
         if (is_parenthesis(c)) {
+
+//            Cant close parenthesis before adding something
+            if (is_closing(c) || stack.is_empty()) return false;
+            if (is_closing(c)) {
+                char top = stack.
+            };
+            if (is_opening(c)) stack.push(c);
 
         }
     }

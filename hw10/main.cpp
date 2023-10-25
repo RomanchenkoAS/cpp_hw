@@ -6,12 +6,54 @@ using namespace std;
 class CharStack {
 private:
     vector<char> array;
+public:
+    CharStack() : array() {};
 
+    CharStack(vector<char> new_vector) : array(new_vector) {};
+
+    int get_size() {
+        return array.size();
+    }
+
+    void push(char c) {
+        array.push_back(c);
+    }
+
+    char pop() {
+        char top_element = array.front();
+        array.pop_back();
+        return top_element;
+    }
 
 };
 
+bool is_parenthesis(const char c) {
+    if (c == '{' || c == '(' || c == '[' || c == '}' || c == ')' || c == ']') return true; else return false;
+}
+
+bool is_opening(const char c) {
+    if (c == '{' || c == '(' || c == '[') return true; else return false;
+}
+bool is_closing(const char c) {
+    if (c == '}' || c == ')' || c == ']') return true; else return false;
+}
+
+bool is_valid(const string input) {
+    for (char c: input) {
+        if (is_parenthesis(c)) {
+
+        }
+    }
+    return false;
+}
+
 int main() {
 
+    cout << "Input string ";
+    string s1;
+    getline(cin, s1);
+    if (is_valid(s1)) cout << "String is valid;" << endl;
+    else cout << "String is not valid;" << endl;
 
     return 0;
 }

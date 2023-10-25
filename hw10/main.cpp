@@ -46,7 +46,14 @@ bool is_closing(const char c) {
     if (c == '}' || c == ')' || c == ']') return true; else return false;
 }
 
-bool is_valid(const string& input) {
+bool match(char c1, char c2) {
+    if (c1 == '{' && c2 == '}') return true;
+    if (c1 == '[' && c2 == ']') return true;
+    if (c1 == '(' && c2 == ')') return true;
+    return false;
+}
+
+bool is_valid(const string &input) {
     CharStack stack;
 
     for (char c: input) {
@@ -55,14 +62,16 @@ bool is_valid(const string& input) {
 //            Cant close parenthesis before adding something
             if (is_closing(c) || stack.is_empty()) return false;
             if (is_closing(c)) {
-                char top = stack.
+                char top = stack.get_top();
+                if (match(top, c)) stack.pop();
+                else return false;
             };
             if (is_opening(c)) stack.push(c);
 
         }
     }
-    return false;
-}
+    if (!stack.is_empty()) return false; else return true;
+};
 
 int main() {
 

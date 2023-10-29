@@ -8,7 +8,7 @@ class FilerBase {
 private:
     ifstream file;
 
-    virtual void (char output) {
+    virtual void print_char(char output) {
         /* Display a single character into console */
         cout << output;
     };

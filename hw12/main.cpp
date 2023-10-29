@@ -7,10 +7,15 @@ using namespace std;
 class FilerBase {
 private:
     ifstream file;
+
+    virtual void (char output) {
+        /* Display a single character into console */
+        cout << output;
+    };
 public:
     FilerBase() : file() {};
 
-    ~FilerBase() {
+    virtual ~FilerBase() {
         if (is_open()) file.close();
     }
 
@@ -28,15 +33,19 @@ public:
         try {
             if (is_open()) {
                 while (file.get(output)) {
-                    cout << output;
+                    print_char(output);
                 }
             } else {
                 throw runtime_error("File is not open.");
             }
         } catch (const exception &e) {
-            cerr << "Error: " << e.what() << std::endl;
+            cerr << "Error: " << e.what() << endl;
         }
     }
+};
+
+class FilerAscii : FilerBase {
+
 };
 
 int main() {

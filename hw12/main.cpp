@@ -9,6 +9,7 @@ private:
     ifstream file;
 public:
     FilerBase() : file() {};
+
     ~FilerBase() {
         if (is_open()) file.close();
     }
@@ -24,22 +25,23 @@ public:
 
     virtual void print() {
         char output = 0;
-        if (is_open()) {
-            while (file.get(output)) {
-                std::cout << output;
+        try {
+            if (is_open()) {
+                while (file.get(output)) {
+                    cout << output;
+                }
+            } else {
+                throw runtime_error("File is not open.");
             }
+        } catch (const exception &e) {
+            cerr << "Error: " << e.what() << std::endl;
         }
-    };
+    }
 };
 
 int main() {
-
     FilerBase f1;
-    try {
-        f1.open_file("hw12/output/file.txt");
-        f1.print();
-    } catch(const exception& e) {
-        cout << e.what() << endl;
-    }
-    return 0;
+    f1.open_file("hw12/output/file.txt");
+    f1.print();
+
 }

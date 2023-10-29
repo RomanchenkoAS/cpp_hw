@@ -8,6 +8,7 @@ class FilerBase {
 private:
     ifstream file;
 
+protected:
     virtual void print_char(char output) {
         /* Display a single character into console */
         cout << output;
@@ -21,14 +22,14 @@ public:
 
     bool is_open() { return (file.is_open()); }
 
-    virtual void open_file(const string &filename) {
+    void open_file(const string &filename) {
         file.open(filename);
         if (!file) {
             throw runtime_error("Failed to open " + filename);
         }
     };
 
-    virtual void print() {
+    void print() {
         char output = 0;
         try {
             if (is_open()) {
@@ -44,13 +45,24 @@ public:
     }
 };
 
-class FilerAscii : FilerBase {
-
+class FilerAscii : public FilerBase {
+private:
+    void print_char(char output) override {
+        cout << (int) output;
+    };
+public:
 };
 
 int main() {
-    FilerBase f1;
-    f1.open_file("hw12/output/file.txt");
-    f1.print();
+    {
+        FilerBase f1;
+        f1.open_file("hw12/output/file.txt");
+        f1.print();
+    }
 
+    {
+        FilerAscii f2;
+        f2.open_file("hw12/output/file.txt");
+        f2.print();
+    }
 }

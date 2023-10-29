@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <bitset>
 
 using namespace std;
 
@@ -48,21 +49,37 @@ public:
 class FilerAscii : public FilerBase {
 private:
     void print_char(char output) override {
-        cout << (int) output;
+        cout << (int) output << " ";
     };
-public:
+};
+
+class FilerBinary : public FilerBase {
+private:
+
+    void print_char(char output) override {
+        cout << bitset<8>(output).to_string() << " ";
+    };
 };
 
 int main() {
+    cout << "Read file as plain text: " << endl;
     {
         FilerBase f1;
-        f1.open_file("hw12/output/file.txt");
+        f1.open_file("hw12/file.txt");
         f1.print();
     }
 
+    cout << "\nRead file in ASCII codes: " << endl;
     {
         FilerAscii f2;
-        f2.open_file("hw12/output/file.txt");
+        f2.open_file("hw12/file.txt");
         f2.print();
+    }
+
+    cout << "\nRead file in binary digits: " << endl;
+    {
+        FilerBinary f3;
+        f3.open_file("hw12/file.txt");
+        f3.print();
     }
 }

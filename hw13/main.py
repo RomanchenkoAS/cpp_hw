@@ -7,7 +7,7 @@ def main() -> None:
 
     # Задача 1
     # Дан список некоторых целых чисел, найдите значение 20 в нем и, если оно присутствует, замените его на 200. Обновите список только при первом вхождении числа 20.
-    list = initial_list
+    list = [i for i in initial_list]
     print(f"\nTask #1\nInitial list: {list}")
     if 20 in list:
         list[list.index(20)] = 200

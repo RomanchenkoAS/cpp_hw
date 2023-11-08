@@ -9,10 +9,6 @@ private:
 public:
     CharStack() : array() {};
 
-//    Сначала я говорю что параметрический конструктор обязателен в классе а потом без него пишу класс
-//    Ну что, забирайте десятку обратно Q_Q
-//    CharStack(vector<char> new_vector) : array(new_vector) {};
-
     size_t get_size() const {
         return array.size();
     }

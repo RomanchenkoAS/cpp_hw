@@ -34,22 +34,22 @@ int main(void) {
             }
             case 3: {
                 std::cin.ignore();
-                std::cout << "Enter name to delete: ";
+                std::cout << "Enter firm title to delete: ";
                 std::getline(std::cin, name);
-                if (phonebook.delete_person(name.c_str()) != 0) {
-                    std::cout << "Person was not found.\n";
+                if (phonebook.delete_firm(name.c_str()) != 0) {
+                    std::cout << "Firm was not found.\n";
                 };
                 break;
             }
             case 4: {
                 std::cin.ignore();
-                std::cout << "Enter name to find: ";
+                std::cout << "Enter firm title to find: ";
                 std::getline(std::cin, name);
-                int position = phonebook.find_person(name.c_str());
+                int position = phonebook.find_firm(name.c_str());
                 if (position == -1) {
                     std::cout << "Person " << name << " was not found\n";
                 } else {
-                    Person *found = phonebook.get_person(position);
+                    Firm *found = phonebook.get_firm(position);
                     found->print();
                 }
                 break;
@@ -75,7 +75,6 @@ int main(void) {
                 std::cout << "Invalid input. Please try again.\n";
                 continue;
             }
-                std::cout << std::endl;
         }
     }
     return 0;

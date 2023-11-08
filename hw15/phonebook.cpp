@@ -32,172 +32,107 @@ int get_int(std::string message) {
     return result;
 }
 
-void testing() {
-// #define test_person
-// #define test_phonebook
-// #define test_read_file
-#ifdef test_person
-    Person p;
-    std::cout << "Empty person:" << std::endl;
-    p.print();
-
-    p.set_name("Albert Einstein");
-    p.set_number_work("112");
-    p.set_number_mobile("8-800-555-35-35");
-    p.set_info("Generally recognized german physicist and mathematician");
-    std::cout << delimiter << "Filled person object:" << std::endl;
-    p.print();
-
-    Person p1(p);
-    std::cout << delimiter << "Copied person object:" << std::endl;
-    p1.print();
-
-    return 0;
-#endif
-#ifdef test_phonebook
-    Person p1("Albert Einstein", "+7-705-449-4570", "+7-999-870-9797",
-              "Generally recognized german physicist and mathematician");
-    Person p2("Isaac Newton", "+44-703-959-2514", "+44-759-123-5678",
-              "English mathematician and physicist");
-    Person p3(
-        "Marie Curie", "+33-655-564-901", "+33-612-345-678",
-        "Polish-born physicist and chemist, first woman to win a Nobel Prize");
-    Person p4("Nikola Tesla", "+1-555-443-2211", "+1-555-987-6543",
-              "Serbian-American inventor, electrical engineer, and futurist");
-    Person p5(
-        "Ada Lovelace", "+44-777-532-3421", "+44-888-765-4321",
-        "English mathematician, known for her work on the Analytical Engine");
-    Person p6("Galileo Galilei", "+39-333-123-4545", "+39-333-678-9012",
-              "Italian astronomer, physicist and polymath");
-
-    // That is a stupid way to fill a phonebook
-    // Phonebook book;
-    // book.add(p1);
-    // book.add(p2);
-    // book.add(p3);
-    // book.add(p4);
-    // book.add(p5);
-    // book.add(p6);
-
-    // That's better
-    Phonebook book({p1, p2, p3, p4, p5, p6});
-    book.print();
-    book.save_to_file("database.txt");
-#endif
-#ifdef test_read_file
-    Phonebook book;
-    if (book.read_from_file("database.txt") != 0) {
-        std::cout << "Failed to read database!\n";
-        return 1;
-    }
-
-    book.print();
-
-#endif
-    return;
-}
-
-void Person::create_field(char *&field, const char *input_line) {
+void Firm::create_field(char *&field, const char *input_line) {
     int length = strlen(input_line);
     field = new char[length + 1];
     strcpy(field, input_line);
 }
 
-Person::Person()
-    : name(nullptr), number_work(nullptr), number_mobile(nullptr),
+Firm::Firm()
+    : title(nullptr), owner_name(nullptr), number(nullptr),
       info(nullptr) {
-    create_field(name, "");
-    create_field(number_work, "");
-    create_field(number_mobile, "");
+    create_field(title, "");
+    create_field(owner_name, "");
+    create_field(number, "");
     create_field(info, "");
 }
-Person::Person(const char *name, const char *number_work,
-               const char *number_mobile, const char *info) {
-    create_field(this->name, name);
-    create_field(this->number_work, number_work);
-    create_field(this->number_mobile, number_mobile);
+Firm::Firm(const char *name, const char *number_work,
+           const char *number_mobile, const char *info) {
+    create_field(this->title, name);
+    create_field(this->owner_name, number_work);
+    create_field(this->number, number_mobile);
     create_field(this->info, info);
 }
-Person::Person(Person const &source_person) {
-    create_field(name, source_person.name);
-    create_field(number_work, source_person.number_work);
-    create_field(number_mobile, source_person.number_mobile);
-    create_field(info, source_person.info);
+Firm::Firm(Firm const &firm) {
+    create_field(title, firm.title);
+    create_field(owner_name, firm.owner_name);
+    create_field(number, firm.number);
+    create_field(info, firm.info);
 }
 
 // Destructor
-Person::~Person() {
-    // std::cout << "Person destruct " << name << std::endl;
-    delete[] name;
-    delete[] number_work;
-    delete[] number_mobile;
+Firm::~Firm() {
+    // std::cout << "Firm destruct " << name << std::endl;
+    delete[] title;
+    delete[] owner_name;
+    delete[] number;
     delete[] info;
 }
 
 // Methods
-Person &Person::operator=(const Person &other) {
+Firm &Firm::operator=(const Firm &other) {
     // Copy assignment
     if (this == &other)
         return *this;
 
-    delete[] name;
-    delete[] number_work;
-    delete[] number_mobile;
+    delete[] title;
+    delete[] owner_name;
+    delete[] number;
     delete[] info;
 
-    create_field(name, other.name);
-    create_field(number_work, other.number_work);
-    create_field(number_mobile, other.number_mobile);
+    create_field(title, other.title);
+    create_field(owner_name, other.owner_name);
+    create_field(number, other.number);
     create_field(info, other.info);
 
     return *this;
 }
-void Person::set_name(const char *input) {
-    delete[] name;
-    create_field(name, input);
+void Firm::set_name(const char *input) {
+    delete[] title;
+    create_field(title, input);
 }
-void Person::set_number_work(const char *input) {
-    delete[] number_work;
-    create_field(number_work, input);
+void Firm::set_number_work(const char *input) {
+    delete[] owner_name;
+    create_field(owner_name, input);
 }
-void Person::set_number_mobile(const char *input) {
-    delete[] number_mobile;
-    create_field(number_mobile, input);
+void Firm::set_number(const char *input) {
+    delete[] number;
+    create_field(number, input);
 }
-void Person::set_info(const char *input) {
+void Firm::set_info(const char *input) {
     delete[] info;
     create_field(info, input);
 }
 
-void Person::print() {
-    std::cout << name << "\n";
-    std::cout << "Work phone: \t" << number_work << "\n";
-    std::cout << "Mobile phone: \t" << number_mobile << "\n";
+void Firm::print() {
+    std::cout << title << "\n";
+    std::cout << "Owner name: \t" << owner_name << "\n";
+    std::cout << "Mobile phone: \t" << number << "\n";
     if (strlen(info) > 0) {
         std::cout << "Info: \t\t" << info << "\n\n";
     }
 }
-void Person::print_summary() {
-    std::cout << name << "; " << number_work << "; " << number_mobile << "; "
+void Firm::print_summary() {
+    std::cout << title << "; " << owner_name << "; " << number << "; "
               << info << "; \n";
 }
-std::string Person::get_summary() const {
-    std::string summary = std::string(name) + "; " + number_work + "; " +
-                          number_mobile + "; " + info + ";";
+std::string Firm::get_summary() const {
+    std::string summary = std::string(title) + "; " + owner_name + "; " +
+                          number + "; " + info + ";";
     return summary;
 }
 
 Phonebook::Phonebook() {
-    content = new Person[0];
+    content = new Firm[0];
     length = 0;
 }
-Phonebook::Phonebook(std::initializer_list<Person> init_list) {
-    // Create phonebook from a list of persons
+Phonebook::Phonebook(std::initializer_list<Firm> init_list) {
+    // Create phonebook from a list of firms
     length = init_list.size();
-    content = new Person[length];
+    content = new Firm[length];
     int i = 0;
-    for (const auto &person : init_list) {
-        content[i++] = person;
+    for (const auto &firm : init_list) {
+        content[i++] = firm;
     }
 }
 Phonebook::~Phonebook() {
@@ -205,19 +140,19 @@ Phonebook::~Phonebook() {
     delete[] content;
 }
 
-void Phonebook::add(Person const &new_person) {
-    Person *new_content = new Person[length + 1];
+void Phonebook::add(Firm const &new_firm) {
+    Firm *new_content = new Firm[length + 1];
 
     for (int i = 0; i < length; i++) {
         new_content[i] = content[i];
     }
-    new_content[length] = new_person;
+    new_content[length] = new_firm;
     delete[] content;
     content = new_content;
     length++;
 }
 void Phonebook::add(const char *input_line) {
-    // Create a person from a character string
+    // Create a firm from a character string
     std::istringstream stream((std::string(input_line)));
     std::string name, number_work, number_mobile, info;
 
@@ -226,15 +161,15 @@ void Phonebook::add(const char *input_line) {
     std::getline(stream, number_mobile, ';');
     std::getline(stream, info, ';');
 
-    Person new_person;
-    new_person.set_name(name.c_str());
-    new_person.set_number_work(number_work.c_str());
-    new_person.set_number_mobile(number_mobile.c_str());
-    new_person.set_info(info.c_str());
+    Firm new_firm;
+    new_firm.set_name(name.c_str());
+    new_firm.set_number_work(number_work.c_str());
+    new_firm.set_number(number_mobile.c_str());
+    new_firm.set_info(info.c_str());
 
-    this->add(new_person);
+    this->add(new_firm);
 }
-int Phonebook::find_person(const char *name) {
+int Phonebook::find_firm(const char *name) {
     for (int i = 0; i < length; i++) {
         if (std::strcmp(name, content[i].get_name()) == 0) {
             return i;
@@ -242,13 +177,13 @@ int Phonebook::find_person(const char *name) {
     }
     return -1;
 }
-int Phonebook::delete_person(const char *name) {
-    int position = find_person(name);
+int Phonebook::delete_firm(const char *name) {
+    int position = find_firm(name);
     if (position != -1) {
-        Person *new_content = new Person[length - 1];
-        Person *ptr_from = content;
+        Firm *new_content = new Firm[length - 1];
+        Firm *ptr_from = content;
 
-        for (Person *ptr_to = new_content; ptr_to < new_content + length - 1;
+        for (Firm *ptr_to = new_content; ptr_to < new_content + length - 1;
              ptr_to++) {
             if (std::strcmp(ptr_from->get_name(), name) != 0) {
                 *ptr_to = *ptr_from;
@@ -263,7 +198,7 @@ int Phonebook::delete_person(const char *name) {
         return 1;
     }
 }
-Person *Phonebook::get_person(int index) const {
+Firm *Phonebook::get_firm(int index) const {
     if (index < 0 || index >= length) {
         return nullptr;
     } else {

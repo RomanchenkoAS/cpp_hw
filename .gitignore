@@ -1,5 +1,6 @@
 */output/
-*/**/output/ 
+*/output
+*/**/output/
 
 *.pdf
 *.zip
@@ -9,3 +10,4 @@
 .idea
 main
 cmake-build-debug
+CMakeLists.txt

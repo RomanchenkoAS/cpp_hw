@@ -6,7 +6,7 @@ int main(void) {
     Phonebook phonebook;
 
     while (true) {
-        std::string name, number_work, number_mobile, info;
+        std::string firm_title, owner_name, number_mobile, info;
         std::cout << delimiter;
         int input = get_int(
                 "Choose action:\n1 - Show all \n2 - Add \n3 - Delete \n4 - Find "
@@ -19,15 +19,15 @@ int main(void) {
             }
             case 2: {
                 std::cin.ignore();
-                std::cout << "Name:\t\t";
-                std::getline(std::cin, name);
-                std::cout << "Work number:\t";
-                std::getline(std::cin, number_work);
+                std::cout << "Firm title:\t\t";
+                std::getline(std::cin, firm_title);
+                std::cout << "Owner name:\t";
+                std::getline(std::cin, owner_name);
                 std::cout << "Mobile number:\t";
                 std::getline(std::cin, number_mobile);
                 std::cout << "Info:\t\t";
                 std::getline(std::cin, info);
-                std::string add_line = name + "; " + number_work + "; " +
+                std::string add_line = firm_title + "; " + owner_name + "; " +
                                        number_mobile + "; " + info + "; ";
                 phonebook.add(add_line.c_str());
                 break;
@@ -35,8 +35,8 @@ int main(void) {
             case 3: {
                 std::cin.ignore();
                 std::cout << "Enter firm title to delete: ";
-                std::getline(std::cin, name);
-                if (phonebook.delete_firm(name.c_str()) != 0) {
+                std::getline(std::cin, firm_title);
+                if (phonebook.delete_firm(firm_title.c_str()) != 0) {
                     std::cout << "Firm was not found.\n";
                 };
                 break;
@@ -44,10 +44,10 @@ int main(void) {
             case 4: {
                 std::cin.ignore();
                 std::cout << "Enter firm title to find: ";
-                std::getline(std::cin, name);
-                int position = phonebook.find_firm(name.c_str());
+                std::getline(std::cin, firm_title);
+                int position = phonebook.find_firm(firm_title.c_str());
                 if (position == -1) {
-                    std::cout << "Person " << name << " was not found\n";
+                    std::cout << "Firm " << firm_title << " was not found\n";
                 } else {
                     Firm *found = phonebook.get_firm(position);
                     found->print();

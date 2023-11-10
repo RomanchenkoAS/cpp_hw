@@ -1,3 +1,4 @@
+// Вы не читаете мой код поэтому я не буду перегружать стрелочку 🤔
 #include <iostream>
 
 template<class T>
@@ -32,6 +33,7 @@ public:
 
     ~smart_shared_ptr() {
         std::cout << "Shared ptr destructor has been called." << std::endl;
+        std::cout << "Shared pointer count = " << this->get_count() << std::endl;
         if (--counter == 0) {
             std::cout << "Value inside object has been deleted." << std::endl;
             delete pointer;
@@ -55,6 +57,10 @@ public:
         return *this;
     }
 
+    int get_count() {
+        return counter;
+    }
+
     T &operator*() {
         return *pointer;
     }
@@ -68,17 +74,22 @@ int main() {
         *p1 = 5;
         std::cout << "Inside local namespace:" << std::endl;
         std::cout << "Ptr 1 = " << *p1 << std::endl;
+        std::cout << "Exit local namespace:" << std::endl;
+
     }
-    std::cout << "This is outside local namespace." << std::endl;
 
     std::cout << "\nThis is testing shared ptr." << std::endl;
     {
         smart_shared_ptr<int> p1(new int);
         *p1 = 5;
-        smart_shared_ptr<int> p2(p1);
         std::cout << "Inside local namespace:" << std::endl;
         std::cout << "Ptr 1 = " << *p1 << std::endl;
-        std::cout << "Ptr 2 = " << *p2 << std::endl;
+        {
+            std::cout << "Inside nested namespace:" << std::endl;
+            smart_shared_ptr<int> p2(p1);
+            std::cout << "Ptr 2 = " << *p2 << std::endl;
+            std::cout << "Exit nested namespace:" << std::endl;
+        }
     }
     return 0;
 }

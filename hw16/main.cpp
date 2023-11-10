@@ -1,3 +1,6 @@
-//
-// Created by artur on 10/11/23.
-//
+#include <iostream>
+
+int main() {
+    std::cout << "Henlo" << std::endl;
+    return 0;
+}

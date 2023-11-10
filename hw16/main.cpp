@@ -35,14 +35,14 @@ public:
         if (--counter == 0) {
             std::cout << "Value inside object has been deleted." << std::endl;
             delete pointer;
-        }💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖
-    };💖💖💖💖💖💖💖
-💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖
-//    You can copy and assign this object!💖💖💖💖💖💖💖💖💖
+        }
+    };
+
+//    You can copy and assign this object!
     smart_shared_ptr(const smart_shared_ptr &other) : pointer(other.pointer), counter(other.counter + 1) {
         return *this;
     };
-//💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖
+
     smart_shared_ptr &operator=(const smart_shared_ptr &other) {
         if (this != &other) {
             pointer = other.pointer;

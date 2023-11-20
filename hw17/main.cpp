@@ -93,17 +93,13 @@ public:
     }
 
     void show_dictionary() {
-        for (auto it = dictionary.begin(); it != dictionary.end(); ++it) {
-            std::cout << it->first << ": " << it->second << std::endl;
+        for (auto & it : dictionary) {
+            std::cout << it.first << ": " << it.second << std::endl;
         }
     }
 
     pair<string, int> get_top_used_word() {
         return top_used_word;
-    }
-
-    string get_text_body() {
-        return text_body;
     }
 };
 

@@ -49,6 +49,7 @@ class Mapper : public FilerBase {
 private:
     string text_body;
     unordered_map<string, int> dictionary;
+    pair<string, int> top_used_word;
 public:
     void print_char(char output) override {
         cout << (int) output << " ";
@@ -71,16 +72,20 @@ public:
 
     void compose_dictionary() {
         string word;
+        top_used_word = {"", 0};
         for (char c: text_body) {
             if (isalpha(c) || c == '\'') {
                 word += c;
             } else {
-                transform(word.begin(), word.end(), tolower);
+                transform(word.begin(), word.end(), word.begin(), ::tolower);
                 if (!word.empty()) {
                     if (dictionary.count(word) == 0) {
                         dictionary.insert({word, 1});
                     } else {
                         dictionary[word]++;
+                    }
+                    if (dictionary[word] > top_used_word.second) {
+                        top_used_word = {word, dictionary[word]};
                     }
                 }
                 word.clear();
@@ -94,6 +99,10 @@ public:
         }
     }
 
+    pair<string, int> get_top_used_word() {
+        return top_used_word;
+    }
+
     string get_text_body() {
         return text_body;
     }
@@ -105,8 +114,9 @@ int main() {
 //    SET CORRECT FILE PATH
     mapper.open_file("/home/artur/dev/cpp_hw/hw17/textfile");
     mapper.read_text();
-//    cout << mapper.get_text_body() << endl;
     mapper.compose_dictionary();
     mapper.show_dictionary();
+    pair<string, int> top_word = mapper.get_top_used_word();
+    cout << "Top used word is \"" << top_word.first << "\" it has been used " << top_word.second << " times.\n";
     return 0;
 }

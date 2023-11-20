@@ -10,7 +10,6 @@ protected:
     ifstream file;
 
     virtual void print_char(char output) {
-        /* Display a single character into console */
         cout << output;
     };
 public:

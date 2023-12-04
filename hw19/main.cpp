@@ -18,9 +18,9 @@
 
 using namespace std;
 
-bool valid_expression(string input) {
+bool valid_expression(const string& input) {
 
-    for (char c : input) {
+    for (char c: input) {
         /*
          * Allowed symbols: 0-9 () + - * / . [space]
          * Forbidden symbol: ,
@@ -37,7 +37,7 @@ bool valid_expression(string input) {
 string clean(string input) {
     // Delete [space] symbols
     for (size_t i = 0; i < input.length(); i++) {
-        if ((int)input[i] == 32) {
+        if ((int) input[i] == 32) {
             input.erase(i--, 1);
         }
     }
@@ -75,7 +75,7 @@ queue<string> shunting_yard(string s) {
     stack<string> operators;
 
     string current_number = "";
-    for (char ch : s) {
+    for (char ch: s) {
         if (isdigit(ch) || ch == '.') {
             current_number += ch;
         } else {
@@ -89,7 +89,7 @@ queue<string> shunting_yard(string s) {
                 operators.push({ch});
 
             }
-            // If a token is an operator push it according to priority
+                // If a token is an operator push it according to priority
             else if (ch != ')') {
                 while (!operators.empty() &&
                        get_priority({ch}) <= get_priority(operators.top())) {
@@ -98,7 +98,7 @@ queue<string> shunting_yard(string s) {
                 }
                 operators.push({ch});
             }
-            // Token is a ) pop all the operators until ( is found
+                // Token is a ) pop all the operators until ( is found
             else {
                 while (!operators.empty() && operators.top() != "(") {
                     output.push(operators.top());
@@ -127,7 +127,7 @@ queue<string> shunting_yard(string s) {
 
 bool is_float(string s) {
     // This string must be a valid float, result is false otherwise
-    for (char ch : s) {
+    for (char ch: s) {
         if ((ch < '0' || ch > '9') && (ch != '.'))
             return false;
     }
@@ -138,10 +138,10 @@ float evaluate_RPN(queue<string> rpn) {
     // Calculate expression in form of Reversed Polish notation (RPN)
     stack<float> tokens;
     unordered_map<string, function<void(float &, float &, float &)>> operators =
-        {{"+", [](float &a, float &b, float &result) { result = b + a; }},
-         {"-", [](float &a, float &b, float &result) { result = b - a; }},
-         {"*", [](float &a, float &b, float &result) { result = b * a; }},
-         {"/", [](float &a, float &b, float &result) { result = b / a; }}};
+            {{"+", [](float &a, float &b, float &result) { result = b + a; }},
+             {"-", [](float &a, float &b, float &result) { result = b - a; }},
+             {"*", [](float &a, float &b, float &result) { result = b * a; }},
+             {"/", [](float &a, float &b, float &result) { result = b / a; }}};
     while (!rpn.empty()) {
         string token = rpn.front();
         rpn.pop();
@@ -162,7 +162,7 @@ float evaluate_RPN(queue<string> rpn) {
     return tokens.top();
 }
 
-int main(void) {
+int main() {
 
     string input;
 
@@ -185,12 +185,12 @@ int main(void) {
     queue<string> RPN_copy = RPN;
 
     // Display rpn
-//    cout << "Reverse polish notation: ";
-//    while (!RPN_copy.empty()) {
-//        cout << RPN_copy.front();
-//        RPN_copy.pop();
-//    }
-//    cout << endl;
+    cout << "Reverse polish notation: ";
+    while (!RPN_copy.empty()) {
+        cout << RPN_copy.front();
+        RPN_copy.pop();
+    }
+    cout << endl;
 
     // Calculation
     cout << "Result: " << input << " = " << evaluate_RPN(RPN) << endl;

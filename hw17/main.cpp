@@ -26,7 +26,6 @@ public:
         if (!file) {
             throw runtime_error("Failed to open " + filename);
         }
-
     };
 
     void print() {
